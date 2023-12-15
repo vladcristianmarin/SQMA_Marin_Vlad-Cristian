@@ -2,20 +2,21 @@ pipeline {
     agent any
     
     stages {
-        stage('Fetch Code') {
+        stage('Checkout') {
             steps {
-                git 'https://github.com/vladcristianmarin/SQMA_Marin_Vlad-Cristian.git'
+              git branch: 'main', url:'https://github.com/vladcristianmarin/SQMA_Marin_Vlad-Cristian.git/'
             }
         }
         
-        stage('Run All Tests') {
+        stage('Install Dependencies') {
             steps {
                 sh 'npm install' 
-                sh 'npm test'
-                 script {
-                    def testOutput = sh(script: 'npm test', returnStdout: true).trim()
-                    echo "${testOutput}"
-                }
+            }
+        }
+        
+        stage('Run Jest Tests') {
+            steps {
+                sh 'npm test' 
             }
         }
     }
