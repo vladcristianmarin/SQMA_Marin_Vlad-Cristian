@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Fetch Code') {
+            steps {
+                git 'https://github.com/vladcristianmarin/SQMA_Marin_Vlad-Cristian.git'
+            }
+        }
+        
+        stage('Run All Tests') {
+            steps {
+                sh 'npm install' 
+                sh 'npm test'
+            }
+        }
+    }
+}
