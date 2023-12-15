@@ -12,6 +12,10 @@ pipeline {
             steps {
                 sh 'npm install' 
                 sh 'npm test'
+                 script {
+                    def testOutput = sh(script: 'npm test', returnStdout: true).trim()
+                    echo "${testOutput}"
+                }
             }
         }
     }
